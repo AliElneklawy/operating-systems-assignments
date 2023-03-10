@@ -1,0 +1,60 @@
+In Linux, the "export" command is used to set environment variables that are available to all child processes of the current shell. To implement the "export" command using setenv() and getenv() in C language, you can use the following steps:
+
+Parse the command line argument passed to the "export" command to get the name and value of the environment variable to be set. The format of the argument should be "VARNAME=VALUE".
+
+Use the setenv() function to set the environment variable with the given name and value. The setenv() function takes three arguments: the name of the environment variable, its value, and a flag indicating whether to overwrite the variable if it already exists. You should set this flag to 1 to ensure that the variable is overwritten if it already exists.
+
+Use the getenv() function to verify that the environment variable was successfully set. The getenv() function takes the name of the environment variable as its argument and returns a pointer to its value. If the variable was not set, this function will return NULL.
+
+Here is an example implementation of the "export" command using setenv() and getenv() in C language:
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(int argc, char *argv[]) {
+    if (argc < 2) {
+        printf("Usage: export VARNAME=VALUE\n");
+        return 1;
+    }
+
+    // Parse the argument to get the variable name and value
+    char *arg = argv[1];
+    char *name = arg;
+    char *value = NULL;
+    while (*arg) {
+        if (*arg == '=') {
+            *arg = '\0';
+            value = arg + 1;
+            break;
+        }
+        arg++;
+    }
+
+    if (!value) {
+        printf("Invalid argument: %s\n", argv[1]);
+        return 1;
+    }
+
+    // Set the environment variable using setenv()
+    if (setenv(name, value, 1) != 0) {
+        printf("Failed to set environment variable: %s\n", name);
+        return 1;
+    }
+
+    // Verify that the variable was successfully set using getenv()
+    char *env_value = getenv(name);
+    if (!env_value) {
+        printf("Failed to get environment variable: %s\n", name);
+        return 1;
+    }
+
+    printf("%s=%s\n", name, env_value);
+
+    return 0;
+}
+
+This program takes one argument, which should be in the format "VARNAME=VALUE". 
+It parses this argument to get the name and value of the environment variable to be set, 
+and then uses setenv() to set the variable. Finally, it uses getenv() to verify that the 
+variable was successfully set, and prints its name and value to the console. 
+If there is any error during this process, the program returns a non-zero exit code.

@@ -1,0 +1,7 @@
+1- ps --ppid <pid of the parent>
+
+2- To get the child process and thread, pstree -p PID. It also show the hierarchical tree
+
+3- pgrep -P PID
+
+4- ps axo stat,ppid,pid,comm
