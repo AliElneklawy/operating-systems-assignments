@@ -41,13 +41,18 @@ void parent_main()
     shell();
 }
 
+void bury_zombies()  // kill all zombie processes
+{
+    int stat;
+    while(waitpid(-1, &stat, WNOHANG) > 0);
+}
 
 void proc_exit()
 {
     fp = fopen("/home/elneklawy/Desktop/OS lab 1/log_file.txt", "a");
     fprintf(fp, " %d- Process was terminated\n", proc_no++);
     fclose(fp);
-
+    bury_zombies();
 }
 
 
@@ -239,9 +244,8 @@ void split_ls_args()
     char* ptr = strtok(cmnd[k], " ");
     int i = 1;
     while(ptr){
-        cmnd[i] = ptr;
+        cmnd[i++] = ptr;
         ptr = strtok(NULL, " ");
-        i++;
     }
     k = i;
 }
@@ -259,7 +263,7 @@ void execute_command()
         if(execvp(cmnd[0], cmnd) < 0){
             perror("execvp error");
         }
-        cmnd[0] = '\0';
+        //cmnd[0] = '\0';
     }
     else{
         if(!amp_flag){  // no & in the command
