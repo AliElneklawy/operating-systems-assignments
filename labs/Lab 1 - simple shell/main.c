@@ -136,7 +136,7 @@ void xprt(int stat)  //stat = 1 in case of setting or 0 in case of getting
         char* val;
         char *res[100];
 
-        for(i = 1; i <= j; i++){
+        for(i = 1; i <= j; i++){      // y will be used to handle any spaces in the input                                          
             y[i-1] = cmnd[i];
         }
         y[i - 1] = '\0';
