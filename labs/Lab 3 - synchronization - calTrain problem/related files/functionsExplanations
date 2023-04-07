@@ -1,0 +1,13 @@
+pthread_mutex_t: This is a data type representing a mutex, which is a programming construct that provides mutual exclusion to shared resources. It is used to synchronize access to shared resources between threads.
+
+pthread_cond_t: This is a data type representing a condition variable, which is used to signal waiting threads that a certain condition has been met. It is often used in conjunction with a mutex.
+
+pthread_mutex_init: This function initializes a mutex variable. It takes a pointer to a mutex variable and a set of attributes as arguments. The attributes argument can be NULL to use the default attributes.
+
+pthread_cond_init: This function initializes a condition variable. It takes a pointer to a condition variable and a set of attributes as arguments. The attributes argument can be NULL to use the default attributes.
+
+pthread_mutex_lock: This function locks a mutex, blocking if it is already locked by another thread. It takes a pointer to a mutex variable as an argument.
+
+pthread_cond_wait: This function waits for a condition variable to be signaled. It takes a pointer to a condition variable and a pointer to a mutex variable as arguments. The mutex is released during the wait, and re-acquired when the wait is over.
+
+pthread_mutex_unlock: This function unlocks a mutex. It takes a pointer to a mutex variable as an argument.

@@ -1,0 +1,14 @@
+pthread_cond_signal is a function in C pthreads library that is used to signal one waiting thread that is blocked on a condition variable.
+
+The pthread_cond_signal function unblocks one thread that is blocked on the specified condition variable. If no threads are waiting on the condition variable, then the signal is ignored.
+
+Here's the syntax of pthread_cond_signal function:
+
+int pthread_cond_signal(pthread_cond_t *cond);
+
+Here's a brief description of the parameters:
+
+cond: A pointer to a condition variable object.
+The pthread_cond_signal function is typically used in conjunction with pthread_cond_wait to synchronize threads on a shared resource. When a thread signals a condition variable using pthread_cond_signal, it indicates that the resource is available and that another thread waiting on the condition variable should try to acquire it.
+
+Note that pthread_cond_signal only unblocks one waiting thread. If multiple threads are waiting on the condition variable, pthread_cond_broadcast should be used instead to unblock all waiting threads.

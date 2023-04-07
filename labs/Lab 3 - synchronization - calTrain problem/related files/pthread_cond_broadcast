@@ -1,0 +1,11 @@
+pthread_cond_broadcast() is a function in the C pthreads library that sends a signal to wake up all threads waiting on a particular condition variable. It can be used to wake up multiple threads that are waiting on a shared resource when that resource becomes available.
+
+The function has the following prototype:
+
+int pthread_cond_broadcast(pthread_cond_t *cond);
+
+The cond argument is a pointer to the condition variable on which the broadcast operation is to be performed.
+
+When pthread_cond_broadcast() is called, all threads currently blocked on the specified condition variable are unblocked and resume execution. Any threads that are not currently blocked on the condition variable will not be affected by the broadcast.
+
+This function is typically used in conjunction with pthread_cond_wait() to implement thread synchronization and communication. The pthread_cond_broadcast() function is used to wake up all threads that are waiting on a particular condition variable when a shared resource becomes available, and the pthread_cond_wait() function is used to block a thread until the resource becomes available.
